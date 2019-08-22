@@ -17,6 +17,10 @@ public class InternalScriptingContainer
     private static final Logger LOGGER = LoggerFactory.getLogger(
             InternalScriptingContainer.class);
 
+    public InternalScriptingContainer() {
+        super();
+    }
+
     public InternalScriptingContainer(LocalContextScope scope) {
         super(scope);
     }

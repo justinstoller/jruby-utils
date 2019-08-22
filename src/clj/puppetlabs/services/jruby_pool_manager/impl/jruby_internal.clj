@@ -98,7 +98,9 @@
 (schema/defn ^:always-validate empty-scripting-container :- ScriptingContainer
   "Creates a clean instance of a JRuby `ScriptingContainer` with no code loaded."
   [config :- jruby-schemas/JRubyConfig]
-  (-> (InternalScriptingContainer. LocalContextScope/SINGLETHREAD)
+  (when-not (System/getProperty "org.jruby.embed.localcontext.scope")
+    (System/setProperty "org.jruby.embed.localcontext.scope" "singlethread"))
+  (-> (InternalScriptingContainer.)
       (init-jruby config)))
 
 (schema/defn ^:always-validate create-scripting-container :- ScriptingContainer
